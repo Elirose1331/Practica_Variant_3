@@ -1,0 +1,82 @@
+%% -*- coding: utf-8 -*-
+\documentclass[12pt,a4paper]{scrartcl} 
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage{misccorr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\begin{document}
+\section{Введение}
+\label{sec:intro}
+
+% Что должно быть во введении
+\begin{enumerate}
+    \item Текстовая формулировка задачи
+    \item Код приложения
+    \item Пример формулы
+    \item Скриншот программы
+    \item Пример библиографических ссылок
+\end{enumerate}
+
+\section{Текстовая формулировка задачи}
+\label{sec:exp:code}
+\begin{mat}
+В данном приложении мы представляем алгоритм реализации метода секущих для нахождения корня функции.
+Примечание:
+В методе Ньютона требуется вычислять производную функции, что не всегда удобно. Можно заменить производную первой разделённой разностью, найденной по двум последним итерациям, т. е. заменить касательную секущей. Это и называется методом секущих. 
+
+\end{mat}
+
+\section{Ход работы}
+\label{sec:exp}
+
+\subsection{Код приложения}
+\label{sec:exp:code}
+\begin{verbatim}
+def F( x : float):
+  return 2*(x**3)-x**2 - 0.46
+
+def search(f: float , a : float , b : float ,  eps : float):
+  while(abs(a - b) > eps):
+         a = b - (b - a) * f(b) / (f(b) - f(a))
+         b = a - (a - b) * f(a) / (f(a) - f(b))
+  return b
+  
+a = float(input('Введите границу а : '))
+
+b = float(input('Введите границу b : '))
+ 
+eps = float(input('Введите погрешность : '))
+
+x = search(F , a , b , eps)
+print("Корень : " , x)
+
+\end{verbatim}
+
+\subsection{Пример формулы}
+\label{sec:exp:code}
+\begin{mat}
+ x_{n+1} = x_{n-1} - \dfrac{f(x_{n})\cdot(x_{n} - x_{n-1})}{f(x_{n}) - f(x_{n-1})}
+\end{mat}
+\section{Скриншот программы}
+\label{sec:picexample}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{codeLiza.PNG}
+\end{figure}
+
+
+\section{Пример библиографических ссылок}
+
+Для изучения «внутренностей» \TeX{} необходимо 
+изучить~\cite{Knuth-2003}, а для использования \LaTeX{} лучше
+почитать~\cite{Lvovsky-2003, Voroncov-2005}.
+
+\begin{thebibliography}{9}
+\bibitem{Knuth-2003}Кнут Д.Э. Всё про \TeX. \newblock --- Москва: Изд. Вильямс, 2003 г. 550~с.
+\bibitem{Lvovsky-2003}Львовский С.М. Набор и верстка в системе \LaTeX{}. \newblock --- 3-е издание, исправленное и дополненное, 2003 г.
+\bibitem{Voroncov-2005}Воронцов К.В. \LaTeX{} в примерах. 2005 г.
+\end{thebibliography}
+
+\end{document}
